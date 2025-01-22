@@ -14,8 +14,8 @@ export class Note {
   @Prop({ default: '' })
   title: string;
 
-  @Prop({ default: '' })
-  content: string;
+  @Prop({ type: Object })
+  content: Record<string, any>;
 
   @Prop({ default: Date.now })
   createdAt: Date;

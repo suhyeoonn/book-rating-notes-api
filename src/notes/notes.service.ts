@@ -14,16 +14,18 @@ export class NotesService {
     return createdNote.save();
   }
 
-  async findAll(): Promise<Note[]> {
-    return this.noteModel.find().exec();
+  async findAll(bookId: number): Promise<Note[]> {
+    return this.noteModel.find({ bookId }).exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} note`;
-  }
+  async update(id: string, updateNoteDto: UpdateNoteDto) {
+    const updatedNote = await this.noteModel
+      .findByIdAndUpdate(id, { $set: updateNoteDto })
+      .exec();
 
-  update(id: number, updateNoteDto: UpdateNoteDto) {
-    return `This action updates a #${id} note`;
+    if (!updatedNote) {
+      throw new Error(`Note with ID ${id} not found`);
+    }
   }
 
   remove(id: number) {
