@@ -3,7 +3,7 @@ import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Note } from './schemas/note.schema';
-import { Model } from 'mongoose';
+import { DeleteResult, Model } from 'mongoose';
 
 @Injectable()
 export class NotesService {
@@ -28,7 +28,7 @@ export class NotesService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} note`;
+  async remove(id: string): Promise<DeleteResult> {
+    return await this.noteModel.deleteOne({ _id: id }).exec();
   }
 }

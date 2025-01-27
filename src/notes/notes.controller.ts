@@ -11,6 +11,7 @@ import {
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { DeleteResult } from 'mongoose';
 
 @Controller('notes')
 export class NotesController {
@@ -32,7 +33,7 @@ export class NotesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.notesService.remove(+id);
+  remove(@Param('id') id: string): Promise<DeleteResult> {
+    return this.notesService.remove(id);
   }
 }
