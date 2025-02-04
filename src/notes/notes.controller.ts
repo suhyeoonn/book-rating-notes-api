@@ -7,23 +7,29 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
+  Request,
+  Req,
 } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { DeleteResult } from 'mongoose';
+import { AuthGuard } from 'src/auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
   @Post()
-  create(@Body() createNoteDto: CreateNoteDto) {
-    return this.notesService.create(createNoteDto);
+  create(@Body() createNoteDto: CreateNoteDto, @Req() req: Request) {
+    return this.notesService.create(createNoteDto, req['user']['id']);
   }
 
   @Get()
   findAll(@Query('bookId') bookId: string) {
+    // TODO: bookId -> myBookId
     return this.notesService.findAll(+bookId);
   }
 

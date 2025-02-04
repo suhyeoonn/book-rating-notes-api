@@ -9,8 +9,8 @@ import { DeleteResult, Model } from 'mongoose';
 export class NotesService {
   constructor(@InjectModel(Note.name) private noteModel: Model<Note>) {}
 
-  async create(createNoteDto: CreateNoteDto): Promise<Note> {
-    const createdNote = new this.noteModel(createNoteDto);
+  async create(createNoteDto: CreateNoteDto, userId: number): Promise<Note> {
+    const createdNote = new this.noteModel({ ...createNoteDto, userId });
     return createdNote.save();
   }
 
