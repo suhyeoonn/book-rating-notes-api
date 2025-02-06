@@ -8,12 +8,12 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    NotesModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/book-rating'),
-    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    NotesModule,
+    MongooseModule.forRoot(process.env.MONGO_URI),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
