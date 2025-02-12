@@ -1,4 +1,4 @@
 export class CreateNoteDto {
+  myBookId: number;
   bookId: number;
-  userId: number;
 }

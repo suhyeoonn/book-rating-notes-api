@@ -28,9 +28,8 @@ export class NotesController {
   }
 
   @Get()
-  findAll(@Query('bookId') bookId: string) {
-    // TODO: bookId -> myBookId
-    return this.notesService.findAll(+bookId);
+  findAll(@Query('myBookId') myBookId: string) {
+    return this.notesService.findAll(+myBookId);
   }
 
   @Patch(':id')

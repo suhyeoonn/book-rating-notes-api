@@ -6,7 +6,10 @@ export type NoteDocument = HydratedDocument<Note>;
 @Schema()
 export class Note {
   @Prop()
-  bookId: number;
+  myBookId: number; // my Books에 등록된 고유 아이디
+
+  @Prop()
+  bookId: number; // book 테이블의 고유 아이디
 
   @Prop()
   userId: number;

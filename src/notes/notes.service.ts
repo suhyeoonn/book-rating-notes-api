@@ -14,8 +14,8 @@ export class NotesService {
     return createdNote.save();
   }
 
-  async findAll(bookId: number): Promise<Note[]> {
-    return this.noteModel.find({ bookId }).exec();
+  async findAll(myBookId: number): Promise<Note[]> {
+    return this.noteModel.find({ myBookId }).exec();
   }
 
   async update(id: string, updateNoteDto: UpdateNoteDto) {
